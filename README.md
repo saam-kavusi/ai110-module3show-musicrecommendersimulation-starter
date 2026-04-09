@@ -21,13 +21,31 @@ Explain your design in plain language.
 
 Some prompts to answer:
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
-
-You can include a simple diagram or bullet list if helpful.
+- The features each song in my system will use are: 
+1) mood
+2) energy
+3) genre
+4) acousticness
+5) tempo_bpm
+6) danceability
+7) valence
+8) artist
+9) title
+- My `UserProfile` stores:
+1) preferred_mood
+2) preferred_energy
+3) preferred_genre
+4) preferred_acousticness
+5) preferred_tempo_bpm
+6) preferred_danceability
+7) preferred_valence
+8) favorite_artists
+- The `Recommender` computes a score by comparing each songs features to the users preferences. It gives the most weight to mood, then energy, then slightly lower weights to genre, acousticness, and tempo. Lower-priority features like danceability and valence help refine the score. Songs that match the users preferred vibe more closely receive higher total scores, and the highest-scoring songs are recommended first. This is based on my own listening preference. 
+- To choose which song to recommend we:
+1) Compare each song to the UserProfile
+2) Give each song a total score
+3) Sort songs from highest score to lowest
+4) Recommend the top songs
 
 ---
 
