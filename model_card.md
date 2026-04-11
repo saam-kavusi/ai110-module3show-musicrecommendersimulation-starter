@@ -2,73 +2,47 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+SwagFinder2.0
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
+My recommender is designed to generate music recommendations based on a user’s preferred genre, mood, energy level, and acoustic style. It tries to suggest songs that match the user’s overall vibe rather than just one single feature.
 
-Prompts:  
+It assumes the user can describe their taste with a few simple preferences, such as favorite genre, favorite mood, and target energy. It also assumes that songs with similar attributes are likely to appeal to the same listener.
 
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+This system is mainly for classroom exploration rather than real-world users. It is a simplified simulation that helps demonstrate how recommendation logic, scoring, and ranking work in practice.  
 
 ---
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+The model uses each song’s genre, mood, energy, and acousticness to decide how well it matches a user. Genre and mood are categorical features, while energy and acousticness help measure how close the song is to the user’s preferred vibe.
 
-Prompts:  
+The user preferences considered are favorite genre, favorite mood, target energy, and whether the user likes acoustic songs. Together, these preferences act like a taste profile that the recommender compares against every song in the dataset.
 
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
+The model turns those features into a score by giving points for matching genre and mood, then adding similarity points when a song’s energy is close to the user’s target. It can also give a small bonus when the user likes acoustic music and the song has high acousticness.
 
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+From the starter logic, I changed the system from placeholder behavior into a real scoring-based recommender. I implemented CSV loading, added weighted scoring rules with explanations, expanded the dataset, and tested how changing features like mood affected the rankings.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+The dataset contains 20 songs in total and is stored in data/songs.csv. It includes a mix of genres and moods such as pop, lofi, rock, ambient, jazz, electronic, hip-hop, soul, country, classical, metal, reggae, blues, and folk, along with moods like happy, chill, intense, relaxed, moody, romantic, melancholic, contemplative, dark, and uplifting. I expanded the starter dataset by adding more songs so the catalog would be more diverse and better for testing different user profiles. Even with those additions, parts of musical taste are still missing, such as lyrics, personal listening history, artist relationships, and more detailed subgenres or emotional nuances. 
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+The system gives the most reasonable results for users with clear and consistent taste profiles, such as someone who likes high-energy pop, chill lofi, or intense rock. My scoring seems to capture the pattern that songs should match both the user’s vibe and their general energy level, rather than relying on only one feature. The recommendations matched my intuition best in the normal test cases, where songs like “Sunrise City” ranked highly for the pop profile and songs like “Library Rain” and “Midnight Coding” ranked highly for the chill lofi profile. 
 
 ---
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+One weakness I discovered is that my recommender is very sensitive to the mood feature, which means it can overfit to one preference when a user profile is conflicting. During the edge-case tests, especially with the “Metal Relaxed Paradox” profile, the system sometimes ranked non-metal songs above actual metal songs because mood carried too much influence and outweighed genre. The system also does not consider other useful features like lyrics, popularity, listening history, or artist similarity, so its view of taste is very limited. Some genres and moods are underrepresented in the dataset, which can make the recommender less accurate for users with rarer preferences and unintentionally favor users whose tastes match the more represented styles.
 
 ---
 
